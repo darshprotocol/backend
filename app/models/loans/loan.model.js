@@ -1,12 +1,24 @@
 module.exports = mongoose => {
     const schema = mongoose.Schema({
+        loanId: {
+            type: String
+        },
         offerId: {
-            type: String,
+            type: String
+        },
+        state: {
+            type: Number
         },
         principalToken: {
             type: Number
         },
         collateralToken: {
+            type: Number
+        },
+        initialPrincipal: {
+            type: String
+        },
+        currentPrincipal: {
             type: String
         },
         initialCollateral: {
@@ -16,21 +28,21 @@ module.exports = mongoose => {
             type: String
         },
         interest: {
+            type: String
+        },
+        startDate: {
             type: Number
         },
-        daysToMaturity: {
-            type: Number
-        },
-        expiresAt: {
-            type: Number
-        },
-        createdAt: {
+        maturityDate: {
             type: Number
         },
         borrower: {
             type: String
+        },
+        lender: {
+            type: String
         }
     }, { timestamps: false });
 
-    return mongoose.model("borrowingoffers", schema);
+    return mongoose.model("loans", schema);
 };

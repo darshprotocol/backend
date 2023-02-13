@@ -2,40 +2,34 @@ module.exports = mongoose => {
     const schema = mongoose.Schema({
         offerId: {
             type: String,
-            required: true,
             unique: true
         },
-        principalType: {
-            type: Number,
-            required: true
+        principalToken: {
+            type: Number
         },
         currentPrincipal: {
-            type: String,
-            required: true
+            type: String
         },
         initialPrincipal: {
-            type: String,
-            required: true
+            type: String
         },
         interest: {
-            type: String,
-            required: true
+            type: String
         },
         daysToMaturity: {
-            type: Number,
-            required: true
+            type: Number
+        },
+        collateralTokens: {
+            type: Array
         },
         expiresAt: {
-            type: Number,
-            required: true
+            type: Number
         },
         createdAt: {
-            type: Number,
-            required: true
+            type: Number
         },
         lender: {
-            type: String,
-            required: true
+            type: String
         }
     }, { timestamps: false });
 
