@@ -1,9 +1,9 @@
 const db = require("../../models");
 const moraliswebhook = require("../../utils/moraliswebhook")
 
-const LendingOffer = db.lendingOffer;
+const Loan = db.loan;
 
-// Create and Save a new/existing LendingOffer
+// Create and Save a new Loan
 exports.create = (req, res) => {
     // A new lending offer parameters will be sent via
     // a POST REQUEST from the smart contract through moralis stream
@@ -11,15 +11,15 @@ exports.create = (req, res) => {
     const postData = moraliswebhook.resolve(req)
     if (postData == null) return res.send("No post data")
 
-    // Save or update LendingOffer in the database
-    LendingOffer.findOneAndUpdate(
+    // Save BorrowingOffer in the database
+    Loan.findOneAndUpdate(
         { offerId: postData.offerId }, // filter
         postData, // data
         { upsert: true }, // options
         function (err, result) {
             if (!err) {
                 if (!result) {
-                    result = new LendingOffer(postData);
+                    result = new Loan(postData);
                 }
                 result.save(function (error) {
                     if (!error) {
@@ -35,22 +35,22 @@ exports.create = (req, res) => {
         })
 };
 
-// Retrieve all LendingOffer from the database.
+// Retrieve all Loan from the database.
 exports.findAll = (req, res) => {
-    LendingOffer.find(req.query)
+    Loan.find(req.query)
         .then(data => {
-            res.send(data)
+            res.send(data);
         })
         .catch(err => {
             res.status(500).send({
                 message: err.message || "Some error occurred."
-            })
-        })
+            });
+        });
 };
 
-// Find a single LendingOffer with an id
+// Find a single Loan with an id
 exports.findOne = (req, res) => {
-    LendingOffer.findById(req.params.id)
+    Loan.findById(req.params.id)
         .then(data => {
             if (!data)
                 res.status(404).send({ message: "Not found with id " + id });

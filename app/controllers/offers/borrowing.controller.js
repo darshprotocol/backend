@@ -5,34 +5,39 @@ const BorrowingOffer = db.borrowingOffer;
 
 // Create and Save a new BorrowingOffer
 exports.create = (req, res) => {
-    // Create a BorrowingOffer
-
     // A new lending offer parameters will be sent via
     // a POST REQUEST from the smart contract through moralis stream
 
-    const postData = moraliswebhook.resolve(req);
-
-    if (postData == null) {
-        return res.send("No post data")
-    }
-
-    const offer = new BorrowingOffer(postData);
+    const postData = moraliswebhook.resolve(req)
+    if (postData == null) return res.send("No post data")
 
     // Save BorrowingOffer in the database
-    offer.save(offer)
-        .then(data => {
-            res.send(data);
+    BorrowingOffer.findOneAndUpdate(
+        { offerId: postData.offerId }, // filter
+        postData, // data
+        { upsert: true }, // options
+        function (err, result) {
+            if (!err) {
+                if (!result) {
+                    result = new BorrowingOffer(postData);
+                }
+                result.save(function (error) {
+                    if (!error) {
+                        res.send(result)
+                    } else {
+                        res.status(500).send({
+                            message: err.message || "Some error occurred."
+                        })
+                    }
+                })
+            }
+            res.send(result);
         })
-        .catch(err => {
-            res.status(500).send({
-                message: err.message || "Some error occurred."
-            });
-        });
 };
 
-// Retrieve all Tutorials from the database.
+// Retrieve all BorrowingOffer from the database.
 exports.findAll = (req, res) => {
-    BorrowingOffer.find({})
+    BorrowingOffer.find(req.query)
         .then(data => {
             res.send(data);
         })
@@ -45,9 +50,7 @@ exports.findAll = (req, res) => {
 
 // Find a single BorrowingOffer with an id
 exports.findOne = (req, res) => {
-    const id = req.params.id;
-
-    BorrowingOffer.findById(id)
+    BorrowingOffer.findById(req.params.id)
         .then(data => {
             if (!data)
                 res.status(404).send({ message: "Not found with id " + id });

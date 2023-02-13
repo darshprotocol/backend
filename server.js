@@ -34,9 +34,9 @@ app.get("/", (req, res) => {
     res.json({ message: "Dash Protocol API V1" });
 });
 
-require("./app/routes/lending-offers.routes")(app);
-require("./app/routes/borrowing-offers.routes")(app);
-require("./app/routes/loans.routes")(app);
+require("./app/routes/offers/lending.routes")(app);
+require("./app/routes/offers/borrowing.routes")(app);
+require("./app/routes/loans/loans.routes")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;

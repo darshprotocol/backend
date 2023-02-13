@@ -1,5 +1,5 @@
 module.exports = app => {
-    const loan = require("../../controllers/loan.controller.js")
+    const loan = require("../../controllers/loans/loan.controller.js")
     const router = require("express").Router()
 
     // Create a new LendingOffer
