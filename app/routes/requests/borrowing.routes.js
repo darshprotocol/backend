@@ -11,5 +11,5 @@ module.exports = app => {
     // Retrieve aall BorrowingRequest with address
     router.get("/:address", borrowingRequest.findOne)
 
-    app.use("/lending-requests", router);
+    app.use("/borrowing-requests", router);
 };
