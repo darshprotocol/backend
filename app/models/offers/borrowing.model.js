@@ -4,7 +4,7 @@ module.exports = mongoose => {
             type: String,
         },
         principalToken: {
-            type: Number
+            type: String
         },
         collateralToken: {
             type: String

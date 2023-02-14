@@ -5,7 +5,7 @@ module.exports = mongoose => {
             unique: true
         },
         principalToken: {
-            type: Number
+            type: String
         },
         currentPrincipal: {
             type: String

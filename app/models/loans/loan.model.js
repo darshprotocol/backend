@@ -10,10 +10,10 @@ module.exports = mongoose => {
             type: Number
         },
         principalToken: {
-            type: Number
+            type: String
         },
         collateralToken: {
-            type: Number
+            type: String
         },
         initialPrincipal: {
             type: String
