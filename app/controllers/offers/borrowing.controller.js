@@ -22,16 +22,13 @@ exports.create = (req, res) => {
                     result = new BorrowingOffer(postData);
                 }
                 result.save(function (error) {
-                    if (!error) {
-                        res.send(result)
-                    } else {
+                    if (error) {
                         res.status(500).send({
                             message: err.message || "Some error occurred."
                         })
                     }
                 })
             }
-            res.send(result);
         })
 };
 
