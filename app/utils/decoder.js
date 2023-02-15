@@ -9,11 +9,11 @@ module.exports = {
     format: function (collection) {
         switch (collection) {
             case 'offers':
-                return ['uint160', 'address', 'uint256', 'uint256', 'uint256', 'uint16', 'address[]', 'uint160', 'uint160', 'address']
+                return ['uint160', 'address', 'uint256', 'uint256', 'uint256', 'uint16', 'uint160', 'uint160', 'address', 'address[]', 'address', 'uint256', 'uint256', 'uint8']
             case 'requests':
-                return ['uint160', 'uint16', 'address', 'uint256', 'uint16', 'uint160', 'uint256', 'uint160', 'address', 'uint160']
+                return ['uint160', 'uint16', 'uint16', 'uint160', 'uint256', 'uint160', 'address', 'uint160', 'address', 'uint256', 'uint256', 'uint160', 'uint8']
             case 'loans':
-                return ['uint256', 'uint160', 'uint8', 'address', 'address', 'uint256', 'uint256', 'uint256', 'uint256', 'uint256', 'uint160', 'uint160', 'address', 'address']
+                return ['uint256', 'uint160', 'uint8', 'address', 'address', 'uint256', 'uint256', 'uint256', 'uint256', 'uint256', 'uint160', 'uint160', 'uint16', 'address', 'address']
             default: return null
         }
     },

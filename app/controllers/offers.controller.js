@@ -5,7 +5,6 @@ const Offer = db.offer;
 
 // Create and Save a new/existing Offer
 exports.create = (req, res) => {
-    // A new lending offer parameters will be sent via
     // a POST REQUEST from the smart contract through moralis stream
 
     const postData = moraliswebhook.resolve(req)

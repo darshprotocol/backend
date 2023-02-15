@@ -6,7 +6,6 @@ const OfferController = require('./offers.controller')
 
 // Create and Save a new/existing Request
 exports.create = (req, res) => {
-    // A new lending offer parameters will be sent via
     // a POST REQUEST from the smart contract through moralis stream
 
     const postData = moraliswebhook.resolve(req)
