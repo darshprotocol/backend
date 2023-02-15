@@ -80,7 +80,7 @@ exports.insertRequestId = (offerId, requestId) => {
 // Find a single Offer with an id
 exports.findOne = (req, res) => {
     let id = req.params.id
-    Offer.findById(id)
+    Offer.findById(id).populate('loans')
         .then(data => {
             if (!data)
                 res.status(404).send({ message: "Not found with id " + id });
