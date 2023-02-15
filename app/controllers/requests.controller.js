@@ -1,9 +1,10 @@
-const db = require("../../models");
-const moraliswebhook = require("../../utils/moraliswebhook")
+const db = require("../models");
+const moraliswebhook = require("../utils/moraliswebhook")
 
-const LendingRequest = db.lendingRequest;
+const Request = db.request;
+const OfferController = require('./offers.controller')
 
-// Create and Save a new/existing LendingRequest
+// Create and Save a new/existing Request
 exports.create = (req, res) => {
     // A new lending offer parameters will be sent via
     // a POST REQUEST from the smart contract through moralis stream
@@ -11,15 +12,15 @@ exports.create = (req, res) => {
     const postData = moraliswebhook.resolve(req)
     if (postData == null) return res.send("No post data")
 
-    // Save or update LendingRequest in the database
-    LendingRequest.findOneAndUpdate(
+    // Save or update Request in the database
+    Request.findOneAndUpdate(
         { requestId: postData.requestId }, // filter
         postData, // data
         { upsert: true }, // options
         function (err, result) {
             if (!err) {
                 if (!result) {
-                    result = new LendingRequest(postData);
+                    result = new Request(postData);
                 }
                 result.save(function (error) {
                     if (error) {
@@ -28,13 +29,14 @@ exports.create = (req, res) => {
                         })
                     }
                 })
+                OfferController.insertRequestId(postData.offerId, result._id)
             }
         })
 };
 
-// Retrieve all LendingRequest from the database.
+// Retrieve all Request from the database.
 exports.findAll = (req, res) => {
-    LendingRequest.find(req.query)
+    Request.find(req.query)
         .then(data => {
             res.send(data)
         })
@@ -45,9 +47,9 @@ exports.findAll = (req, res) => {
         })
 };
 
-// Find a single LendingRequest with an id
+// Find a single Request with an id
 exports.findOne = (req, res) => {
-    LendingRequest.findById(req.params.id)
+    Request.findById(req.params.id)
         .then(data => {
             if (!data)
                 res.status(404).send({ message: "Not found with id " + id });

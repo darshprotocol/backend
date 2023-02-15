@@ -19,13 +19,28 @@ module.exports = mongoose => {
         createdAt: {
             type: Number
         },
-        lender: {
+        creator: {
             type: String
         },
         offerId: {
             type: String
+        },
+        collateralToken: {
+            type: String
+        },
+        collateralAmount: {
+            type: String
+        },
+        collateralPriceInUSD: {
+            type: String
+        },
+        ltvUsed: {
+            type: Number
+        },
+        requestType: {
+            type: Number
         }
     }, { timestamps: false });
 
-    return mongoose.model("lendingrequests", schema);
+    return mongoose.model("requests", schema);
 };

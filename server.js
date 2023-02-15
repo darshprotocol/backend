@@ -33,11 +33,9 @@ app.get("/", (req, res) => {
     res.json({ message: "Darsh Protocol API V1" })
 })
 
-require("./app/routes/loans/loans.routes")(app)
-require("./app/routes/offers/lending.routes")(app)
-require("./app/routes/offers/borrowing.routes")(app)
-require("./app/routes/requests/lending.routes.js")(app)
-require("./app/routes/requests/borrowing.routes.js")(app)
+require("./app/routes/loans.routes")(app)
+require("./app/routes/offers.routes")(app)
+require("./app/routes/requests.routes.js")(app)
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080

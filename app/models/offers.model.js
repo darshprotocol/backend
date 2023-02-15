@@ -19,19 +19,39 @@ module.exports = mongoose => {
         daysToMaturity: {
             type: Number
         },
-        collateralTokens: {
-            type: Array
-        },
         expiresAt: {
             type: Number
         },
         createdAt: {
             type: Number
         },
-        lender: {
+        creator: {
             type: String
-        }
+        },
+        collateralTokens: {
+            type: Array
+        },
+        collateralToken: {
+            type: String
+        },
+        currentCollateral: {
+            type: String
+        },
+        initialCollateral: {
+            type: String
+        },
+        offerType: {
+            type: Number
+        },
+        loans: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'loans'
+        }],
+        requests: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'requests'
+        }]
     }, { timestamps: false });
 
-    return mongoose.model("lendingoffers", schema);
+    return mongoose.model("offers", schema);
 };

@@ -36,6 +36,9 @@ module.exports = mongoose => {
         maturityDate: {
             type: Number
         },
+        graceDays: {
+            type: Number
+        },
         borrower: {
             type: String
         },
