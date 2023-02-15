@@ -49,7 +49,8 @@ exports.findAll = (req, res) => {
 
 // Find a single Request with an id
 exports.findOne = (req, res) => {
-    Request.findById(req.params.id)
+    let id = req.params.id
+    Request.findById(id)
         .then(data => {
             if (!data)
                 res.status(404).send({ message: "Not found with id " + id });

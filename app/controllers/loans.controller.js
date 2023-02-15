@@ -49,7 +49,8 @@ exports.findAll = (req, res) => {
 
 // Find a single Loan with an id
 exports.findOne = (req, res) => {
-    Loan.findById(req.params.id)
+    let id = req.params.id
+    Loan.findById(id)
         .then(data => {
             if (!data)
                 res.status(404).send({ message: "Not found with id " + id });

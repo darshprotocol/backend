@@ -77,7 +77,8 @@ exports.insertRequestId = (offerId, requestId) => {
 
 // Find a single Offer with an id
 exports.findOne = (req, res) => {
-    Offer.findById(req.params.id)
+    let id = req.params.id
+    Offer.findById(id)
         .then(data => {
             if (!data)
                 res.status(404).send({ message: "Not found with id " + id });
