@@ -21,15 +21,14 @@ exports.create = (req, res) => {
             if (!err) {
                 if (!result) {
                     result = new Offer(postData);
+                    result.save(function (err) {
+                        if (err) {
+                            res.status(500).send({
+                                message: err.message || "Some err occurred."
+                            })
+                        }
+                    })
                 }
-                result.save(function (err) {
-                    if (err) {
-                        res.status(500).send({
-                            message: err.message || "Some err occurred."
-                        })
-                    }
-                })
-                console.log(result);
             }
         })
 };
@@ -80,7 +79,7 @@ exports.insertRequestId = (offerId, requestId) => {
 // Find a single Offer with an id
 exports.findOne = (req, res) => {
     let id = req.params.id
-    Offer.findById(id).populate('loans')
+    Offer.findById(id).populate(['loans','requests'])
         .then(data => {
             if (!data)
                 res.status(404).send({ message: "Not found with id " + id });

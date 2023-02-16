@@ -20,15 +20,15 @@ exports.create = (req, res) => {
             if (!err) {
                 if (!result) {
                     result = new Loan(postData);
-                }
-                result.save(function (err) {
-                    if (err) {
-                        res.status(500).send({
-                            message: err.message || "Some err occurred."
-                        })
-                    }
+                    result.save(function (err) {
+                        if (err) {
+                            res.status(500).send({
+                                message: err.message || "Some err occurred."
+                            })
+                        }
+                    })
                     OfferController.insertLoanId(postData.offerId, result._id)
-                })
+                }
             }
         })
 };

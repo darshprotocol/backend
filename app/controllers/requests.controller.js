@@ -20,15 +20,15 @@ exports.create = (req, res) => {
             if (!err) {
                 if (!result) {
                     result = new Request(postData);
+                    result.save(function (err) {
+                        if (err) {
+                            res.status(500).send({
+                                message: err.message || "Some err occurred."
+                            })
+                        }
+                    })
+                    OfferController.insertRequestId(postData.offerId, result._id)
                 }
-                result.save(function (err) {
-                    if (err) {
-                        res.status(500).send({
-                            message: err.message || "Some err occurred."
-                        })
-                    }
-                })
-                OfferController.insertRequestId(postData.offerId, result._id)
             }
         })
 };
