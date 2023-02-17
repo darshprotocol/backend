@@ -9,11 +9,11 @@ module.exports = {
     format: function (collection) {
         switch (collection) {
             case 'offers':
-                return ['uint160', 'address', 'uint256', 'uint256', 'uint256', 'uint16', 'uint160', 'uint160', 'address', 'address[]', 'address', 'uint256', 'uint256', 'uint8']
+                return ['uint256', 'address', 'uint256', 'uint256', 'uint256', 'uint16', 'uint256', 'uint256', 'address', 'address[]', 'address', 'uint256', 'uint256', 'uint8']
             case 'requests':
-                return ['uint160', 'uint16', 'uint16', 'uint160', 'uint256', 'uint160', 'address', 'uint160', 'address', 'uint256', 'uint256', 'uint160', 'uint8']
+                return ['uint256', 'uint16', 'uint16', 'uint256', 'uint256', 'uint256', 'address', 'uint256', 'address', 'uint256', 'uint256', 'uint160', 'uint8']
             case 'loans':
-                return ['uint256', 'uint160', 'uint8', 'address', 'address', 'uint256', 'uint256', 'uint256', 'uint256', 'uint256', 'uint160', 'uint160', 'uint16', 'address', 'address']
+                return ['uint256', 'uint256', 'uint8', 'address', 'address', 'uint256', 'uint256', 'uint256', 'uint256', 'uint256', 'uint256', 'uint256', 'uint16', 'address', 'address']
             default: return null
         }
     },
@@ -41,8 +41,8 @@ module.exports = {
                     requestId: data[0],
                     percentage: data[1],
                     daysToMaturity: data[2],
-                    expiresAt: data[3],
                     interest: data[4],
+                    expiresAt: data[3],
                     createdAt: data[5],
                     creator: data[6].toLowerCase(),
                     offerId: data[7],

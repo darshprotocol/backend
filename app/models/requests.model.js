@@ -10,11 +10,11 @@ module.exports = mongoose => {
         daysToMaturity: {
             type: Number
         },
-        expiresAt: {
-            type: Number
-        },
         interest: {
             type: String
+        },
+        expiresAt: {
+            type: Number
         },
         createdAt: {
             type: Number
