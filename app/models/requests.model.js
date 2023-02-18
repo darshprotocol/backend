@@ -4,6 +4,9 @@ module.exports = mongoose => {
             type: String,
             unique: true
         },
+        state: {
+            type: Number
+        },
         percentage: {
             type: Number
         },
