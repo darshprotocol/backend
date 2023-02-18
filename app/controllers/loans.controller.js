@@ -20,6 +20,7 @@ exports.create = (req, res) => {
             if (!err) {
                 if (!result) {
                     result = new Loan(postData);
+                    OfferController.insertLoanId(postData.offerId, result._id)
                     result.save(function (err) {
                         if (err) {
                             res.status(500).send({
@@ -27,7 +28,6 @@ exports.create = (req, res) => {
                             })
                         }
                     })
-                    OfferController.insertLoanId(postData.offerId, result._id)
                 }
             }
         })

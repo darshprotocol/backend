@@ -9,9 +9,9 @@ module.exports = {
     format: function (collection) {
         switch (collection) {
             case 'offers':
-                return ['uint256', 'address', 'uint256', 'uint256', 'uint256', 'uint16', 'uint256', 'uint256', 'address', 'address[]', 'address', 'uint256', 'uint256', 'uint8']
+                return ['uint256', 'uint8', 'address', 'uint256', 'uint256', 'uint256', 'uint16', 'uint256', 'uint256', 'address', 'address[]', 'address', 'uint256', 'uint256', 'uint8']
             case 'requests':
-                return ['uint256', 'uint16', 'uint16', 'uint256', 'uint256', 'uint256', 'address', 'uint256', 'address', 'uint256', 'uint256', 'uint160', 'uint8']
+                return ['uint256', 'uint8', 'uint16', 'uint16', 'uint256', 'uint256', 'uint256', 'address', 'uint256', 'address', 'uint256', 'uint256', 'uint160', 'uint8']
             case 'loans':
                 return ['uint256', 'uint256', 'uint8', 'address', 'address', 'uint256', 'uint256', 'uint256', 'uint256', 'uint256', 'uint256', 'uint256', 'uint16', 'address', 'address']
             default: return null
@@ -22,35 +22,37 @@ module.exports = {
             case 'offers':
                 return {
                     offerId: data[0],
-                    principalToken: data[1],
-                    currentPrincipal: data[2],
-                    initialPrincipal: data[3],
-                    interest: data[4],
-                    daysToMaturity: data[5],
-                    expiresAt: data[6],
-                    createdAt: data[7],
-                    creator: data[8].toLowerCase(),
-                    collateralTokens: data[9],
-                    collateralToken: data[10],
-                    currentCollateral: data[11],
-                    initialCollateral: data[12],
-                    offerType: data[13]
+                    state: data[1],
+                    principalToken: data[2],
+                    currentPrincipal: data[3],
+                    initialPrincipal: data[4],
+                    interest: data[5],
+                    daysToMaturity: data[6],
+                    expiresAt: data[7],
+                    createdAt: data[8],
+                    creator: data[9].toLowerCase(),
+                    collateralTokens: data[10],
+                    collateralToken: data[11],
+                    currentCollateral: data[12],
+                    initialCollateral: data[13],
+                    offerType: data[14]
                 }
             case 'requests':
                 return {
                     requestId: data[0],
-                    percentage: data[1],
-                    daysToMaturity: data[2],
+                    state: data[1],
+                    percentage: data[2],
+                    daysToMaturity: data[3],
                     interest: data[4],
-                    expiresAt: data[3],
-                    createdAt: data[5],
-                    creator: data[6].toLowerCase(),
-                    offerId: data[7],
-                    collateralToken: data[8],
-                    collateralAmount: data[9],
-                    collateralPriceInUSD: data[10],
-                    ltvUsed: data[11],
-                    requestType: data[12]
+                    expiresAt: data[5],
+                    createdAt: data[6],
+                    creator: data[7].toLowerCase(),
+                    offerId: data[8],
+                    collateralToken: data[9],
+                    collateralAmount: data[10],
+                    collateralPriceInUSD: data[11],
+                    ltvUsed: data[12],
+                    requestType: data[13]
                 }
             case 'loans':
                 return {

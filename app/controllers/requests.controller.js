@@ -18,18 +18,24 @@ exports.create = (req, res) => {
         { upsert: true }, // options
         function (err, result) {
             if (!err) {
+                console.log('Not Err');
                 if (!result) {
+                    console.log('Not result');
                     result = new Request(postData);
+                    console.log('1', result._id);
+                    OfferController.insertRequestId(postData.offerId, result._id)
                     result.save(function (err) {
                         if (err) {
+                            console.log('Saving failed', err);
                             res.status(500).send({
                                 message: err.message || "Some err occurred."
                             })
                         }
                     })
-                    OfferController.insertRequestId(postData.offerId, result._id)
+                    console.log('2', result._id);
                 }
             }
+            console.log('Yes Err', err);
         })
 };
 
