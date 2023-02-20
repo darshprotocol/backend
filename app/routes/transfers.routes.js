@@ -8,5 +8,5 @@ module.exports = app => {
     // Retrieve all transfers
     router.get("/", transfer.findAll)
 
-    app.use("/transfer", router);
+    app.use("/transfers", router);
 };
