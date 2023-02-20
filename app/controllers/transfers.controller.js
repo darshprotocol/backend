@@ -11,7 +11,7 @@ exports.create = (req, res) => {
     if (postData == null) return res.send("No post data")
 
     // Save or update loans in the database
-    let transfer = Transfer(postData)
+    let transfer = new Transfer(postData)
     transfer.save(function (err) {
         if (err) {
             console.log('Saving failed', err);
