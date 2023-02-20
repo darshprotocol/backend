@@ -6,12 +6,13 @@ exports.resolve = (request) => {
     let collection = webhook.tag
     console.log('webhook', webhook)
 
-    if (!webhook || !webhook.logs) return null
+    if (!webhook || !webhook.logs || webhook.confirmed) return null
 
     try {
         for (const log of webhook.logs) {
             const format = decoder.format(collection)
-            console.log('format', format)
+            
+            console.log('inouts', webhook.abi[0].inputs)
 
             // abi format does not exists for event data
             if (format == null || typeof format === 'undefined') continue

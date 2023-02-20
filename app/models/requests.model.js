@@ -1,7 +1,7 @@
 module.exports = mongoose => {
     const schema = mongoose.Schema({
         requestId: {
-            type: String,
+            type: Number,
             unique: true
         },
         state: {

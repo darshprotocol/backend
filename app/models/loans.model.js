@@ -1,10 +1,11 @@
 module.exports = mongoose => {
     const schema = mongoose.Schema({
         loanId: {
-            type: String
+            type: Number,
+            unique: true
         },
         offerId: {
-            type: String
+            type: Number
         },
         state: {
             type: Number

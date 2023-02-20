@@ -18,11 +18,8 @@ exports.create = (req, res) => {
         { upsert: true }, // options
         function (err, result) {
             if (!err) {
-                console.log('Not Err');
                 if (!result) {
-                    console.log('Not result');
                     result = new Request(postData);
-                    console.log('1', result._id);
                     OfferController.insertRequestId(postData.offerId, result._id)
                     result.save(function (err) {
                         if (err) {
@@ -32,10 +29,8 @@ exports.create = (req, res) => {
                             })
                         }
                     })
-                    console.log('2', result._id);
                 }
             }
-            console.log('Yes Err', err);
         })
 };
 
