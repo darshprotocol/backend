@@ -8,9 +8,9 @@ exports.create = (req, res) => {
     // a POST REQUEST from the smart contract through moralis stream
 
     const postData = moraliswebhook.resolve(req)
-    if (postData == null) return res.send("No post data")
-
     console.log(postData);
+
+    if (postData == null) return res.send("No post data")
 
     // Save or update loans in the database
     let transfer = new Transfer(postData)
