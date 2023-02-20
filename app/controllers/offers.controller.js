@@ -15,8 +15,8 @@ exports.create = (req, res) => {
     // Save or update Offer in the database
     Offer.findOneAndUpdate(
         { offerId: postData.offerId }, // filter
-        postData, // data
-        { upsert: true }, // options
+        { $set: postData}, // data
+        { upsert: false }, // options
         function (err, result) {
             if (!err) {
                 if (!result) {

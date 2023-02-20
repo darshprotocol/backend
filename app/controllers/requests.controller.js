@@ -14,8 +14,8 @@ exports.create = (req, res) => {
     // Save or update Request in the database
     Request.findOneAndUpdate(
         { requestId: postData.requestId }, // filter
-        postData, // data
-        { upsert: true }, // options
+        { $set: postData}, // data
+        { upsert: false }, // options
         function (err, result) {
             if (!err) {
                 if (!result) {
