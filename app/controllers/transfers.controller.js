@@ -14,15 +14,16 @@ exports.create = (req, res) => {
 
     // Save or update loans in the database
     let transfer = new Transfer(postData)
-    transfer.save(function (err) {
-        if (err) {
-            console.log('Saving failed', err);
+
+    Transfer.save(transfer)
+        .then(data => {
+            res.send(data)
+        }).catch(err => {
             res.status(500).send({
                 message: err.message || "Some err occurred."
             })
-        }
-        res.send(transfer)
-    })
+        })
+
 };
 
 // Retrieve all Transfer from the database.

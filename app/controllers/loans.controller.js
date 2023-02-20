@@ -14,16 +14,16 @@ exports.create = (req, res) => {
     // Save or update loans in the database
     Loan.findOneAndUpdate(
         { loanId: postData.loanId }, // filter
-        { $set: postData}, // data
-        { upsert: true, returnNewDocument : true }, // options
-        function (err, result) {
-            if (!err) {
-                if (result) {
-                    OfferController.insertLoanId(postData.offerId, result._id)
-                }
-            }
-            res.send(result)
+        { $set: postData }, // data
+        { upsert: true, returnNewDocument: true }, // options
+    ).then(data => {
+        OfferController.insertLoanId(data.offerId, data._id)
+        res.send(data)
+    }).catch(err => {
+        res.status(500).send({
+            message: err.message || "Some err occurred."
         })
+    })
 };
 
 // Retrieve all Loan from the database.

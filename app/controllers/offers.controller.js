@@ -13,18 +13,16 @@ exports.create = (req, res) => {
     // Save or update Offer in the database
     Offer.findOneAndUpdate(
         { offerId: postData.offerId }, // filter
-        { $set: postData}, // data
-        { upsert: true, returnNewDocument : true }, // options
-        function (err, result) {
-            console.log(result);
-            if (err) {
-                res.status(500).send({
-                    message: err.message || "Some err occurred."
-                })
-            }
-            res.send(result)
+        { $set: postData }, // data
+        { upsert: true, returnNewDocument: true }, // options
+    ).then(data => {
+        res.send(data)
+    }).catch(err => {
+        res.status(500).send({
+            message: err.message || "Some err occurred."
         })
-};
+    })
+}
 
 // Retrieve all Offer from the database.
 exports.findAll = (req, res) => {
@@ -72,7 +70,7 @@ exports.insertRequestId = (offerId, requestId) => {
 // Find a single Offer with an id
 exports.findOne = (req, res) => {
     let id = req.params.id
-    Offer.findById(id).populate(['loans','requests'])
+    Offer.findById(id).populate(['loans', 'requests'])
         .then(data => {
             if (!data)
                 res.status(404).send({ message: "Not found with id " + id });
