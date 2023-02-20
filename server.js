@@ -36,6 +36,7 @@ app.get("/", (req, res) => {
 require("./app/routes/loans.routes")(app)
 require("./app/routes/offers.routes")(app)
 require("./app/routes/requests.routes.js")(app)
+require("./app/routes/transfers.routes.js")(app)
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080

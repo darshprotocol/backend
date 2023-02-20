@@ -6,7 +6,7 @@ exports.resolve = (request) => {
     let collection = webhook.tag
     console.log('webhook', webhook)
 
-    if (!webhook || !webhook.logs || webhook.confirmed) return null
+    if (!webhook || !webhook.logs) return null
 
     try {
         for (const log of webhook.logs) {
