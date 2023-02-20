@@ -15,19 +15,11 @@ exports.create = (req, res) => {
     Request.findOneAndUpdate(
         { requestId: postData.requestId }, // filter
         { $set: postData}, // data
-        { upsert: false }, // options
+        { upsert: true, returnNewDocument : true }, // options
         function (err, result) {
             if (!err) {
                 if (!result) {
                     OfferController.insertRequestId(postData.offerId, result._id)
-                    result.save(function (err) {
-                        if (err) {
-                            console.log('Saving failed', err);
-                            res.status(500).send({
-                                message: err.message || "Some err occurred."
-                            })
-                        }
-                    })
                 }
             }
             res.send(result)

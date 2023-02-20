@@ -15,18 +15,11 @@ exports.create = (req, res) => {
     Loan.findOneAndUpdate(
         { loanId: postData.loanId }, // filter
         { $set: postData}, // data
-        { upsert: true }, // options
+        { upsert: true, returnNewDocument : true }, // options
         function (err, result) {
             if (!err) {
                 if (result) {
                     OfferController.insertLoanId(postData.offerId, result._id)
-                    result.save(function (err) {
-                        if (err) {
-                            res.status(500).send({
-                                message: err.message || "Some err occurred."
-                            })
-                        }
-                    })
                 }
             }
             res.send(result)
