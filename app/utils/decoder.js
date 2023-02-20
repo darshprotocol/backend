@@ -14,7 +14,7 @@ module.exports = {
                 return ['uint256', 'uint8', 'uint16', 'uint16', 'uint256', 'uint256', 'uint256', 'address', 'uint256', 'address', 'uint256', 'uint256', 'uint160', 'uint8']
             case 'loans':
                 return ['uint256', 'uint256', 'uint8', 'address', 'address', 'uint256', 'uint256', 'uint256', 'uint256', 'uint256', 'uint256', 'uint256', 'uint16', 'address', 'address']
-            case 'transfer':
+            case 'transfers':
                 return ['uint256', 'address', 'address', 'uint256', 'address', 'uint256']
             default: return null
         }
