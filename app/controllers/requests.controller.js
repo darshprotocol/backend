@@ -19,7 +19,6 @@ exports.create = (req, res) => {
         function (err, result) {
             if (!err) {
                 if (!result) {
-                    result = new Request(postData);
                     OfferController.insertRequestId(postData.offerId, result._id)
                     result.save(function (err) {
                         if (err) {
@@ -31,6 +30,7 @@ exports.create = (req, res) => {
                     })
                 }
             }
+            res.send(result)
         })
 };
 

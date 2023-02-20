@@ -15,11 +15,10 @@ exports.create = (req, res) => {
     Loan.findOneAndUpdate(
         { loanId: postData.loanId }, // filter
         { $set: postData}, // data
-        { upsert: false }, // options
+        { upsert: true }, // options
         function (err, result) {
             if (!err) {
                 if (result) {
-                    result = new Loan(postData);
                     OfferController.insertLoanId(postData.offerId, result._id)
                     result.save(function (err) {
                         if (err) {
@@ -30,6 +29,7 @@ exports.create = (req, res) => {
                     })
                 }
             }
+            res.send(result)
         })
 };
 

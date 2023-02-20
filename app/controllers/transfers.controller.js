@@ -10,8 +10,6 @@ exports.create = (req, res) => {
     const postData = moraliswebhook.resolve(req)
     if (postData == null) return res.send("No post data")
 
-    console.log(postData);
-
     // Save or update loans in the database
     let transfer = new Transfer(postData)
     transfer.save(function (err) {
@@ -21,6 +19,7 @@ exports.create = (req, res) => {
                 message: err.message || "Some err occurred."
             })
         }
+        res.send(result)
     })
 };
 

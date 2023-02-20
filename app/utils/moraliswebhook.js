@@ -2,9 +2,7 @@ const decoder = require('./decoder.js')
 
 exports.resolve = (request) => {
     const webhook = request.body
-
     let collection = webhook.tag
-    console.log('webhook', webhook)
 
     if (!webhook || !webhook.logs) return null
 
@@ -16,7 +14,6 @@ exports.resolve = (request) => {
             if (format == null || typeof format === 'undefined') continue
 
             const data = decoder.decode(format, log.data)
-            console.log('data', data)
 
             return decoder.toObject(collection, data)
         }
