@@ -42,14 +42,14 @@ exports.insertLoanId = (offerId, loanId) => {
     Offer.findOneAndUpdate(
         { offerId: offerId }, // filter
         { $push: { 'loans': loanId } }, // data
-        { upsert: true }, // options
-        function (err, result) {
-            if (err) {
-                res.status(500).send({
-                    message: err.message || "Some err occurred."
-                })
-            }
+        { upsert: false }, // options
+    ).then(data => {
+        res.send(data)
+    }).catch(err => {
+        res.status(500).send({
+            message: err.message || "Some err occurred."
         })
+    })
 }
 
 // Insert request id
@@ -57,14 +57,14 @@ exports.insertRequestId = (offerId, requestId) => {
     Offer.findOneAndUpdate(
         { offerId: offerId }, // filter
         { $push: { 'requests': requestId } }, // data
-        { upsert: true }, // options
-        function (err, result) {
-            if (err) {
-                res.status(500).send({
-                    message: err.message || "Some err occurred."
-                })
-            }
+        { upsert: false }, // options
+    ).then(data => {
+        res.send(data)
+    }).catch(err => {
+        res.status(500).send({
+            message: err.message || "Some err occurred."
         })
+    })
 }
 
 // Find a single Offer with an id
