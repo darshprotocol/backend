@@ -6,6 +6,8 @@ exports.resolve = (request) => {
 
     if (!webhook || !webhook.logs) return null
 
+    console.log(webhook);
+
     try {
         for (const log of webhook.logs) {
             const format = decoder.format(collection)

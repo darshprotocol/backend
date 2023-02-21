@@ -78,7 +78,7 @@ module.exports = {
                 return {
                     offerId: data[0],
                     from: data[1].toLowerCase(),
-                    to: date[2].toLowerCase(),
+                    to: data[2].toLowerCase(),
                     amount: data[3],
                     token: data[4],
                     timestamp: data[5]

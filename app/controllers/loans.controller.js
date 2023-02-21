@@ -2,7 +2,7 @@ const db = require("../models");
 const moraliswebhook = require("../utils/moraliswebhook")
 
 const Loan = db.loan;
-const OfferController = require('./offers.controller')
+const offerController = require('./offers.controller')
 
 // Create and Save a new Loan
 exports.create = (req, res) => {
@@ -15,9 +15,13 @@ exports.create = (req, res) => {
     Loan.findOneAndUpdate(
         { loanId: postData.loanId }, // filter
         { $set: postData }, // data
-        { upsert: true, returnNewDocument: true }, // options
+        {
+            upsert: true,
+            returnNewDocument: true,
+            returnDocument: "after"
+        } // options
     ).then(data => {
-        OfferController.insertLoanId(data.offerId, data._id)
+        offerController.insertLoanId(data.offerId, data._id)
         res.send(data)
     }).catch(err => {
         res.status(500).send({

@@ -2,7 +2,7 @@ const db = require("../models");
 const moraliswebhook = require("../utils/moraliswebhook")
 
 const Request = db.request;
-const OfferController = require('./offers.controller')
+const offerController = require('./offers.controller')
 
 // Create and Save a new/existing Request
 exports.create = (req, res) => {
@@ -15,11 +15,16 @@ exports.create = (req, res) => {
     Request.findOneAndUpdate(
         { requestId: postData.requestId }, // filter
         { $set: postData }, // data
-        { upsert: true, returnNewDocument: true } // options
+        {
+            upsert: true,
+            returnNewDocument: true,
+            returnDocument: "after"
+        } // options
     ).then(data => {
-        OfferController.insertRequestId(data.offerId, data._id)
+        offerController.insertRequestId(postData.offerId, data._id)
         res.send(data)
     }).catch(err => {
+        console.log(err);
         res.status(500).send({
             message: err.message || "Some err occurred."
         })
