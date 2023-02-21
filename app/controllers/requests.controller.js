@@ -24,7 +24,6 @@ exports.create = (req, res) => {
         offerController.insertRequestId(postData.offerId, data._id)
         res.send(data)
     }).catch(err => {
-        console.log(err);
         res.status(500).send({
             message: err.message || "Some err occurred."
         })
@@ -54,8 +53,8 @@ exports.findOne = (req, res) => {
             else res.send(data);
         })
         .catch(err => {
-            res
-                .status(500)
-                .send({ message: "Error retrieving with id=" + id });
+            res.status(500).send({
+                message: "Error retrieving with id=" + id 
+            });
         });
 };

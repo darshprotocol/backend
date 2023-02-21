@@ -53,8 +53,8 @@ exports.findOne = (req, res) => {
             else res.send(data);
         })
         .catch(err => {
-            res
-                .status(500)
-                .send({ message: "Error retrieving with id=" + id });
+            res.status(500).send({
+                message: "Error retrieving with id=" + id
+            });
         });
 };

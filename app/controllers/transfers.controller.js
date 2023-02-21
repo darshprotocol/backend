@@ -2,7 +2,6 @@ const db = require("../models");
 const moraliswebhook = require("../utils/moraliswebhook")
 
 const Transfer = db.transfer;
-const offerController = require('./offers.controller')
 
 // Create and Save a new Transfer
 exports.create = (req, res) => {
