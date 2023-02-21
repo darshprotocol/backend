@@ -1,8 +1,5 @@
 module.exports = mongoose => {
     const schema = mongoose.Schema({
-        transferId: {
-            type: Number
-        },
         offerId: {
             type: Number
         },

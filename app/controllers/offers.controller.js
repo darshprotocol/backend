@@ -46,8 +46,16 @@ exports.insertLoanId = (offerId, loanId) => {
     Offer.findOneAndUpdate(
         { offerId: offerId }, // filter
         { $addToSet: { 'loans': loanId } }, // data
-        { upsert: false }, // options
-    )
+        {
+            upsert: true,
+            returnNewDocument: true,
+            returnDocument: "after"
+        } // options
+    ).then(data => {
+        console.log(data);
+    }).catch(err => {
+        console.log(err);
+    })
 }
 
 // Insert request id
@@ -55,17 +63,34 @@ exports.insertRequestId = (offerId, requestId) => {
     Offer.findOneAndUpdate(
         { offerId: offerId }, // filter
         { $addToSet: { 'requests': requestId } }, // data
-        { upsert: false }, // options
-    )
+        {
+            upsert: true,
+            returnNewDocument: true,
+            returnDocument: "after"
+        } // options
+    ).then(data => {
+        console.log(data);
+    }).catch(err => {
+        console.log(err);
+    })
 }
 
 // Insert request id
 exports.insertTransferId = (offerId, transferId) => {
+    console.log('insert', transferId);
     Offer.findOneAndUpdate(
         { offerId: offerId }, // filter
         { $addToSet: { 'transfers': transferId } }, // data
-        { upsert: false }, // options
-    )
+        {
+            upsert: true,
+            returnNewDocument: true,
+            returnDocument: "after"
+        } // options
+    ).then(data => {
+        console.log(data);
+    }).catch(err => {
+        console.log(err);
+    })
 }
 
 // Find a single Offer with an id

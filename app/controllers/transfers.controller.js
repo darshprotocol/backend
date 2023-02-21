@@ -11,9 +11,11 @@ exports.create = (req, res) => {
     const postData = moraliswebhook.resolve(req)
     if (postData == null) return res.send("No post data")
 
+    console.log('postData', postData);
+
     // Save or update Offer in the database
     Transfer.findOneAndUpdate(
-        { transferId: postData.transferId }, // filter
+        { hash: postData.hash }, // filter
         { $set: postData }, // data
         {
             upsert: true,
