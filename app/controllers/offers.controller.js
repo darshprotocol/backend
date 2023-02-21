@@ -77,7 +77,6 @@ exports.insertRequestId = (offerId, requestId) => {
 
 // Insert request id
 exports.insertTransferId = (offerId, transferId) => {
-    console.log('insert', transferId);
     Offer.findOneAndUpdate(
         { offerId: offerId }, // filter
         { $addToSet: { 'transfers': transferId } }, // data
