@@ -15,7 +15,7 @@ exports.create = (req, res) => {
 
     // Save or update Offer in the database
     Transfer.findOneAndUpdate(
-        { hash: postData.transferId }, // filter
+        { transferId: postData.transferId }, // filter
         { $set: postData }, // data
         {
             upsert: true,

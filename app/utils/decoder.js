@@ -15,7 +15,7 @@ module.exports = {
             case 'loans':
                 return ['uint256', 'uint256', 'uint8', 'address', 'address', 'uint256', 'uint256', 'uint256', 'uint256', 'uint256', 'uint256', 'uint256', 'uint16', 'address', 'address']
             case 'transfers':
-                return ['uint256', 'address', 'address', 'uint256', 'address', 'uint256']
+                return ['uint256', 'uint256', 'address', 'uint256', 'address', 'uint256']
             default: return null
         }
     },
@@ -76,9 +76,9 @@ module.exports = {
                 }
             case 'transfers':
                 return {
-                    offerId: data[0],
-                    from: data[1].toLowerCase(),
-                    to: data[2].toLowerCase(),
+                    transferId: data[0],
+                    offerId: data[1],
+                    from: data[2].toLowerCase(),
                     amount: data[3],
                     token: data[4],
                     hash: hash,

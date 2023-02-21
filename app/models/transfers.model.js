@@ -1,12 +1,12 @@
 module.exports = mongoose => {
     const schema = mongoose.Schema({
+        transferId: {
+            type: Number
+        },
         offerId: {
             type: Number
         },
         from: {
-            type: String
-        },
-        to: {
             type: String
         },
         amount: {
