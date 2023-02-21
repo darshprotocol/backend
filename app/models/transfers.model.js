@@ -15,11 +15,8 @@ module.exports = mongoose => {
         token: {
             type: String
         },
-        // hash: {
-        //     type: String
-        // },
         timestamp: {
-            Number
+            type: Number
         }
     }, { timestamps: false });
 
