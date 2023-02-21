@@ -18,8 +18,7 @@ exports.resolve = (request) => {
             return decoder.toObject(collection, data)
         }
     } catch (error) {
+        console.error(error);
         return null
     }
-
-    return null
 }

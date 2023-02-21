@@ -8,7 +8,7 @@ exports.create = (req, res) => {
     // a POST REQUEST from the smart contract through moralis stream
 
     const postData = moraliswebhook.resolve(req)
-    console.log(postData);
+    console.log('transfer postDate', postData);
 
     if (postData == null) return res.send("No post data")
 
