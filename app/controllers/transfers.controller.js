@@ -1,5 +1,6 @@
 const db = require("../models");
 const moraliswebhook = require("../utils/moraliswebhook")
+const offer = require('./offers.controller')
 
 const Transfer = db.transfer;
 
@@ -10,16 +11,23 @@ exports.create = (req, res) => {
     const postData = moraliswebhook.resolve(req)
     if (postData == null) return res.send("No post data")
 
-    // Save or update loans in the database
-    let transfer = new Transfer(postData)
-    transfer.save(transfer)
-        .then(data => {
-            res.send(data)
-        }).catch(err => {
-            res.status(500).send({
-                message: err.message || "Some err occurred."
-            })
+    // Save or update Offer in the database
+    Transfer.findOneAndUpdate(
+        { transferId: postData.transferId }, // filter
+        { $set: postData }, // data
+        {
+            upsert: true,
+            returnNewDocument: true,
+            returnDocument: "after"
+        } // options
+    ).then(data => {
+        offer.insertTransferId(postData.offerId, data._id)
+        res.send(data)
+    }).catch(err => {
+        res.status(500).send({
+            message: err.message || "Some err occurred."
         })
+    })
 
 };
 

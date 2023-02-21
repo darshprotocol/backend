@@ -15,9 +15,10 @@ exports.resolve = (request) => {
             // abi format does not exists for event data
             if (format == null || typeof format === 'undefined') continue
 
+            const hash = log.transactionHash
             const data = decoder.decode(format, log.data)
 
-            return decoder.toObject(collection, data)
+            return decoder.toObject(collection, data, hash)
         }
     } catch (error) {
         console.error(error);

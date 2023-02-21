@@ -1,8 +1,8 @@
 const db = require("../models");
 const moraliswebhook = require("../utils/moraliswebhook")
+const offer = require('./offers.controller')
 
 const Loan = db.loan;
-const offerController = require('./offers.controller')
 
 // Create and Save a new Loan
 exports.create = (req, res) => {
@@ -21,7 +21,7 @@ exports.create = (req, res) => {
             returnDocument: "after"
         } // options
     ).then(data => {
-        offerController.insertLoanId(data.offerId, data._id)
+        offer.insertLoanId(postData.offerId, data._id)
         res.send(data)
     }).catch(err => {
         res.status(500).send({
@@ -39,22 +39,6 @@ exports.findAll = (req, res) => {
         .catch(err => {
             res.status(500).send({
                 message: err.message || "Some err occurred."
-            });
-        });
-};
-
-// Find a single Loan with an id
-exports.findOne = (req, res) => {
-    let id = req.params.id
-    Loan.findById(id)
-        .then(data => {
-            if (!data)
-                res.status(404).send({ message: "Not found with id " + id });
-            else res.send(data);
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: "Error retrieving with id=" + id
             });
         });
 };

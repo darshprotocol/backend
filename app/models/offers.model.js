@@ -53,6 +53,10 @@ module.exports = mongoose => {
         requests: [{
             type: mongoose.Schema.Types.ObjectId,
             ref: 'requests'
+        }],
+        transfers: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'transfers'
         }]
     }, { timestamps: false });
 

@@ -15,11 +15,11 @@ module.exports = {
             case 'loans':
                 return ['uint256', 'uint256', 'uint8', 'address', 'address', 'uint256', 'uint256', 'uint256', 'uint256', 'uint256', 'uint256', 'uint256', 'uint16', 'address', 'address']
             case 'transfers':
-                return ['uint256', 'address', 'address', 'uint256', 'address', 'uint256']
+                return ['uint256', 'uint256', 'address', 'address', 'uint256', 'address', 'uint256']
             default: return null
         }
     },
-    toObject: function (collection, data) {
+    toObject: function (collection, data, hash) {
         switch (collection) {
             case 'offers':
                 return {
@@ -76,12 +76,14 @@ module.exports = {
                 }
             case 'transfers':
                 return {
-                    offerId: data[0],
-                    from: data[1].toLowerCase(),
-                    to: data[2].toLowerCase(),
-                    amount: data[3],
-                    token: data[4],
-                    timestamp: data[5]
+                    transferId: data[0],
+                    offerId: data[1],
+                    from: data[2].toLowerCase(),
+                    to: data[3].toLowerCase(),
+                    amount: data[4],
+                    token: data[5],
+                    hash: hash,
+                    timestamp: data[6]
                 }
             default: return null
         }

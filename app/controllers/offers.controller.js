@@ -14,7 +14,11 @@ exports.create = (req, res) => {
     Offer.findOneAndUpdate(
         { offerId: postData.offerId }, // filter
         { $set: postData }, // data
-        { upsert: true, returnNewDocument: true }, // options
+        {
+            upsert: true,
+            returnNewDocument: true,
+            returnDocument: "after"
+        } // options
     ).then(data => {
         res.send(data)
     }).catch(err => {
@@ -41,7 +45,7 @@ exports.findAll = (req, res) => {
 exports.insertLoanId = (offerId, loanId) => {
     Offer.findOneAndUpdate(
         { offerId: offerId }, // filter
-        { $push: { 'loans': loanId } }, // data
+        { $addToSet: { 'loans': loanId } }, // data
         { upsert: false }, // options
     )
 }
@@ -50,23 +54,32 @@ exports.insertLoanId = (offerId, loanId) => {
 exports.insertRequestId = (offerId, requestId) => {
     Offer.findOneAndUpdate(
         { offerId: offerId }, // filter
-        { $push: { 'requests': requestId } }, // data
-        { upsert: true }, // options
+        { $addToSet: { 'requests': requestId } }, // data
+        { upsert: false }, // options
+    )
+}
+
+// Insert request id
+exports.insertTransferId = (offerId, transferId) => {
+    Offer.findOneAndUpdate(
+        { offerId: offerId }, // filter
+        { $addToSet: { 'transfers': transferId } }, // data
+        { upsert: false }, // options
     )
 }
 
 // Find a single Offer with an id
 exports.findOne = (req, res) => {
     let id = req.params.id
-    Offer.findById(id).populate(['loans', 'requests'])
+    Offer.findById(id).populate(['loans', 'requests', 'transfers'])
         .then(data => {
             if (!data)
                 res.status(404).send({ message: "Not found with id " + id });
             else res.send(data);
         })
         .catch(err => {
-            res.status(500).send({ 
-                message: "Error retrieving with id=" + id 
+            res.status(500).send({
+                message: "Error retrieving with id=" + id
             });
         });
 };
