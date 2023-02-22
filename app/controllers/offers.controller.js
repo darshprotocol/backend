@@ -8,22 +8,24 @@ exports.create = (req, res) => {
     // a POST REQUEST from the smart contract through moralis stream
 
     const postData = moraliswebhook.resolve(req)
-    if (postData == null) return res.send("No post data")
+    if (postData == []) return res.send("No post data")
 
-    // Save or update Offer in the database
-    Offer.findOneAndUpdate(
-        { offerId: postData.offerId }, // filter
-        { $set: postData }, // data
-        {
-            upsert: true,
-            returnNewDocument: true,
-            returnDocument: "after"
-        } // options
-    ).then(data => {
-        res.send(data)
-    }).catch(err => {
-        res.status(500).send({
-            message: err.message || "Some err occurred."
+    postData.forEach(_postData => {
+        // Save or update Offer in the database
+        Offer.findOneAndUpdate(
+            { offerId: _postData.offerId }, // filter
+            { $set: _postData }, // data
+            {
+                upsert: true,
+                returnNewDocument: true,
+                returnDocument: "after"
+            } // options
+        ).then(data => {
+            res.send(data)
+        }).catch(err => {
+            res.status(500).send({
+                message: err.message || "Some err occurred."
+            })
         })
     })
 }

@@ -9,25 +9,28 @@ exports.create = (req, res) => {
     // a POST REQUEST from the smart contract through moralis stream
 
     const postData = moraliswebhook.resolve(req)
-    if (postData == null) return res.send("No post data")
+    if (postData == []) return res.send("No post data")
 
-    // Save or update loans in the database
-    Loan.findOneAndUpdate(
-        { loanId: postData.loanId }, // filter
-        { $set: postData }, // data
-        {
-            upsert: true,
-            returnNewDocument: true,
-            returnDocument: "after"
-        } // options
-    ).then(data => {
-        offer.insertLoanId(postData.offerId, data._id)
-        res.send(data)
-    }).catch(err => {
-        res.status(500).send({
-            message: err.message || "Some err occurred."
+    postData.forEach(_postData => {
+        // Save or update loans in the database
+        Loan.findOneAndUpdate(
+            { loanId: _postData.loanId }, // filter
+            { $set: _postData }, // data
+            {
+                upsert: true,
+                returnNewDocument: true,
+                returnDocument: "after"
+            } // options
+        ).then(data => {
+            offer.insertLoanId(_postData.offerId, data._id)
+            res.send(data)
+        }).catch(err => {
+            res.status(500).send({
+                message: err.message || "Some err occurred."
+            })
         })
     })
+
 };
 
 // Retrieve all Loan from the database.
