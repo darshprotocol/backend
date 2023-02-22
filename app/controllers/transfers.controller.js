@@ -11,8 +11,6 @@ exports.create = (req, res) => {
     const postData = moraliswebhook.resolve(req)
     if (postData == []) return res.send("No post data")
 
-    console.log('postData', postData);
-
     postData.forEach(_postData => {
         // Save or update Offer in the database
         Transfer.findOneAndUpdate(
