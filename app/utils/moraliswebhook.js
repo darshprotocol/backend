@@ -6,7 +6,7 @@ exports.resolve = (request) => {
     if (!webhook || !webhook.logs) return null
     
     const objects = []
-    let collection = webhook.tag
+    const collection = webhook.tag
 
     try {
         for (const log of webhook.logs) {
