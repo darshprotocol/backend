@@ -15,6 +15,9 @@ module.exports = mongoose => {
         token: {
             type: String
         },
+        type: {
+            type: Number
+        },
         hash: {
             type: String
         },

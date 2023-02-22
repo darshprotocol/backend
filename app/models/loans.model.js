@@ -40,6 +40,30 @@ module.exports = mongoose => {
         graceDays: {
             type: Number
         },
+        collateralPriceInUSD: {
+            type: String
+        },
+        numInstallmentsPaid: {
+            type: Number
+        },
+        unClaimedPrincipal: {
+            type: String
+        },
+        unClaimedCollateral: {
+            type: String
+        },
+        unClaimedDefaultCollateral: {
+            type: String
+        },
+        unClaimedBorrowedPrincipal: {
+            type: String
+        },
+        totalInterestPaid: {
+            type: String
+        },
+        repaidOn: {
+            type: Number
+        },
         borrower: {
             type: String
         },

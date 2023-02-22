@@ -14,12 +14,14 @@ module.exports = {
                 return ['uint256', 'uint8', 'uint16', 'uint16', 'uint256', 'uint256', 'uint256', 'address', 'uint256', 'address', 'uint256', 'uint256', 'uint160', 'uint8']
             case 'loans':
                 return ['uint256', 'uint256', 'uint8', 'address', 'address', 'uint256', 'uint256', 'uint256', 'uint256', 'uint256', 'uint256', 'uint256', 'uint16', 'address', 'address']
+            case 'loans-property':
+                return ['uint256', 'uint256', 'uint8', 'uint256', 'uint256', 'uint256', 'uint256', 'uint256', 'uint256']
             case 'transfers':
-                return ['uint256', 'uint256', 'address', 'uint256', 'address', 'uint256']
+                return ['uint256', 'uint256', 'address', 'uint256', 'address', 'uint8', 'uint256']
             default: return null
         }
     },
-    toObject: function (collection, data, hash) {
+    toObject: function (collection, data, transactionHash) {
         switch (collection) {
             case 'offers':
                 return {
@@ -74,6 +76,18 @@ module.exports = {
                     borrower: data[13].toLowerCase(),
                     lender: data[14].toLowerCase()
                 }
+            case 'loans-property':
+                return {
+                    loanId: data[0],
+                    collateralPriceInUSD: data[1],
+                    numInstallmentsPaid: data[2],
+                    unClaimedPrincipal: data[3],
+                    unClaimedCollateral: data[4],
+                    unClaimedDefaultCollateral: data[5],
+                    unClaimedBorrowedPrincipal: data[6],
+                    totalInterestPaid: data[7],
+                    repaidOn: data[8]
+                }
             case 'transfers':
                 return {
                     transferId: data[0],
@@ -81,8 +95,9 @@ module.exports = {
                     from: data[2].toLowerCase(),
                     amount: data[3],
                     token: data[4],
-                    hash: hash,
-                    timestamp: data[5]
+                    type: data[5],
+                    hash: transactionHash,
+                    timestamp: data[6]
                 }
             default: return null
         }
