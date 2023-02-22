@@ -2,11 +2,11 @@ const decoder = require('./decoder.js')
 
 exports.resolve = (request) => {
     const webhook = request.body
-    let collection = webhook.tag
-
+    
     if (!webhook || !webhook.logs) return null
-
+    
     const objects = []
+    let collection = webhook.tag
 
     try {
         for (const log of webhook.logs) {
