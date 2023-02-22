@@ -9,7 +9,7 @@ exports.create = (req, res) => {
     // a POST REQUEST from the smart contract through moralis stream
 
     const postData = moraliswebhook.resolve(req)
-    if (postData == null || postData == []) return res.send("No post data")
+    if (postData == null || postData.length == 0) return res.send("No post data")
 
     postData.forEach(_postData => [
         // Save or update Request in the database
