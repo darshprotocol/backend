@@ -45,3 +45,15 @@ exports.findAll = (req, res) => {
             });
         });
 };
+
+exports.findVault = (req, res) => {
+    let address = req.query.address
+    Loan.find({ $or: [{ lender: address }, { borrower: address }] })
+        .then(data => {
+            res.send(data);
+        }).catch(err => {
+            res.status(500).send({
+                message: err.message || "Some err occurred."
+            });
+        });
+}

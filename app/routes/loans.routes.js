@@ -8,5 +8,7 @@ module.exports = app => {
     // Retrieve all loans
     router.get("/", loan.findAll)
 
+    router.get("/vault", loan.findVault)
+
     app.use("/loans", router);
 };
