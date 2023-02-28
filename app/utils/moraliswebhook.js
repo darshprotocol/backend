@@ -3,7 +3,7 @@ const decoder = require('./decoder.js')
 exports.resolve = (request) => {
     const webhook = request.body
     
-    if (!webhook || !webhook.logs) return null
+    if (!webhook || !webhook.logs || webhook.confirmed) return null
     
     const objects = []
     const collection = webhook.tag
