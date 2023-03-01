@@ -8,5 +8,8 @@ module.exports = app => {
     // Retrieve all users
     router.get("/", user.findAll)
 
+    // Retrieve a single user with address
+    router.get("/:address", user.findOne)
+
     app.use("/users", router);
 };
