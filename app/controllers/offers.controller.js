@@ -77,7 +77,7 @@ exports.insertRequestId = (offerId, requestId) => {
     })
 }
 
-// Insert request id
+// Insert transfer id
 exports.insertTransferId = (offerId, transferId) => {
     Offer.findOneAndUpdate(
         { offerId: offerId }, // filter

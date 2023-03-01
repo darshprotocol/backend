@@ -18,6 +18,8 @@ module.exports = {
                 return ['uint256', 'uint256', 'uint8', 'uint256', 'uint256', 'uint256', 'uint256', 'uint256', 'uint256']
             case 'transfers':
                 return ['uint256', 'uint256', 'address', 'uint256', 'address', 'uint8', 'uint256']
+            case 'activities':
+                return ['address', 'uint16', 'uint16', 'uint256', 'uint256', 'uint256', 'uint256', 'uint256', 'uint16', 'uint256', 'uint256', 'uint16']
             default: return null
         }
     },
@@ -98,6 +100,21 @@ module.exports = {
                     type: data[5],
                     hash: transactionHash,
                     timestamp: data[6]
+                }
+            case 'activities':
+                return {
+                    address: data[0].toLowerCase(),
+                    borrowedTimes: data[1],
+                    lentTimes: data[2],
+                    borrowedVolume: data[3],
+                    lentVolume: data[4],
+                    lastActive: data[5],
+                    collateralVolume: data[6],
+                    interestPaidVolume: data[7],
+                    defaultedTimes: data[8],
+                    defaultedVolume: data[9],
+                    firstBorrowAt: data[10],
+                    activeLoans: data[11]
                 }
             default: return null
         }

@@ -33,6 +33,7 @@ app.get("/", (req, res) => {
     res.json({ message: "Darsh Protocol API V1" })
 })
 
+require("./app/routes/users.routes")(app)
 require("./app/routes/loans.routes")(app)
 require("./app/routes/offers.routes")(app)
 require("./app/routes/requests.routes.js")(app)
