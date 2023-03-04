@@ -123,7 +123,8 @@ module.exports = {
                     id: data[0],
                     timestamp: data[1],
                     from: data[2].toLowerCase(),
-                    to: data[3].toLowerCase()
+                    to: data[3].toLowerCase(),
+                    readAt: 0
                 }
             default: return null
         }
