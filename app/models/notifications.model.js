@@ -11,6 +11,9 @@ module.exports = mongoose => {
         },
         to: {
             type: String
+        },
+        readAt: {
+            type: Number
         }
     }, { timestamps: false });
 
