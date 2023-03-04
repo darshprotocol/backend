@@ -32,6 +32,10 @@ exports.create = (req, res) => {
 
 // Retrieve all Offer from the database.
 exports.findAll = (req, res) => {
+
+    req.query.expiresAt = { $gte: req.query.expiresAt ? req.query.expiresAt : 0 }
+    req.query.currentPrincipal = { $gte: req.query.currentPrincipal ? req.query.currentPrincipal : 0 }
+
     Offer.find(req.query).populate('loans')
         .then(data => {
             res.send(data)
