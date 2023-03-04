@@ -33,26 +33,7 @@ exports.create = (req, res) => {
 
 // Retrieve all Offer from the database.
 exports.findAll = (req, res) => {
-
-    let query = {}
-
-    if (req.query.offerType) {
-        query.offerType = req.query.offerType
-    }
-
-    if (req.query.creator) {
-        query.creator = req.query.creator
-    }
-
-    if (req.query.default) {
-        query.$or = [
-            { expiresAt: { $gte: (Date.now() / 1000).toFixed(0) } },
-            { currentPrincipal: { $gte: 0 } },
-            { initialPrincipal: { $gte: 0 } }
-        ]
-    }
-
-    Offer.find(query).populate('loans')
+    Offer.find(req.query).populate('loans')
         .then(data => {
             res.send(data)
         })
