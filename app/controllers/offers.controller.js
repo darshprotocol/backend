@@ -44,10 +44,13 @@ exports.findAll = (req, res) => {
         query.creator = req.query.creator
     }
 
-    query.$or = [
-        { expiresAt: { $gte: req.query.expiresAt ? req.query.expiresAt : 0 } },
-        { currentPrincipal: { $gte: req.query.currentPrincipal ? req.query.currentPrincipal : 0 } }
-    ]
+    if (req.query.default) {
+        query.$or = [
+            { expiresAt: { $gte: (Date.now() / 1000).toFixed(0) } },
+            { currentPrincipal: { $gte: 0 } },
+            { initialPrincipal: { $gte: 0 } }
+        ]
+    }
 
     Offer.find(query).populate('loans')
         .then(data => {
