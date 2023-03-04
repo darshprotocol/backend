@@ -1,3 +1,4 @@
+const { query } = require("express");
 const db = require("../models");
 const moraliswebhook = require("../utils/moraliswebhook")
 
@@ -33,10 +34,22 @@ exports.create = (req, res) => {
 // Retrieve all Offer from the database.
 exports.findAll = (req, res) => {
 
-    req.query.expiresAt = { $gte: req.query.expiresAt ? req.query.expiresAt : 0 }
-    req.query.currentPrincipal = { $gte: req.query.currentPrincipal ? req.query.currentPrincipal : 0 }
+    let query = {}
 
-    Offer.find(req.query).populate('loans')
+    if (req.query.offerType) {
+        query.offerType = req.query.offerType
+    }
+
+    if (req.query.creator) {
+        query.creator = req.query.creator
+    }
+
+    query.$or = [
+        { expiresAt: { $gte: req.query.expiresAt ? req.query.expiresAt : 0 } },
+        { currentPrincipal: { $gte: req.query.currentPrincipal ? req.query.currentPrincipal : 0 } }
+    ]
+
+    Offer.find(query).populate('loans')
         .then(data => {
             res.send(data)
         })
