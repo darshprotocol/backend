@@ -15,5 +15,6 @@ db.offer = require("./offers.model.js")(mongoose);
 db.request = require("./requests.model.js")(mongoose);
 db.user = require("./users.model.js")(mongoose);
 db.transfer = require("./transfers.model.js")(mongoose);
+db.notification = require("./notifications.model.js")(mongoose);
 
 module.exports = db;

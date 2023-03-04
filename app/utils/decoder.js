@@ -20,6 +20,8 @@ module.exports = {
                 return ['uint256', 'uint256', 'address', 'uint256', 'address', 'uint8', 'uint256']
             case 'activities':
                 return ['address', 'uint16', 'uint16', 'uint256', 'uint256', 'uint256', 'uint256', 'uint256', 'uint16', 'uint256', 'uint256', 'uint16']
+            case 'notifications': 
+                return ['uint', 'uint256', 'address', 'address']
             default: return null
         }
     },
@@ -115,6 +117,13 @@ module.exports = {
                     defaultedVolume: data[9],
                     firstBorrowAt: data[10],
                     activeLoans: data[11]
+                }
+            case 'notifications':
+                return {
+                    id: data[0],
+                    timestamp: data[1],
+                    from: data[2].toLowerCase(),
+                    to: data[3].toLowerCase()
                 }
             default: return null
         }
