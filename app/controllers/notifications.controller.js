@@ -11,7 +11,8 @@ exports.create = (req, res) => {
 
     postData.forEach(_postData => {
         // Save or update Notification in the database
-        Notification.save(_postData).then(data => {
+        const notification = new Notification(_postData)
+        notification.save().then(data => {
             res.send(data)
         }).catch(err => {
             res.status(500).send({
