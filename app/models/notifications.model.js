@@ -13,7 +13,8 @@ module.exports = mongoose => {
             type: String
         },
         offerId: {
-            type: String
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'offers'
         },
         readAt: {
             type: Number
