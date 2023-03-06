@@ -16,13 +16,11 @@ exports.create = async (req, res) => {
 
         try {
             offer = await Offer.findOne({ offerId: postData.fieldId })
+            console.log(offer);
+            _postData.offerId = offer._id;
+            _postData.offerType = offer.offerType;
         } catch (error) {
             console.error(error);
-        }
-
-        
-        if (offer) {
-            _postData.offerId = offer._id;
         }
  
         // Save or update Notification in the database

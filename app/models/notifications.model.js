@@ -16,6 +16,9 @@ module.exports = mongoose => {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'offers'
         },
+        offerType: {
+            type: Number
+        },
         readAt: {
             type: Number
         }
