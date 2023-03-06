@@ -15,8 +15,7 @@ exports.create = async (req, res) => {
         let offer = null;
 
         try {
-            offer = await Offer.findOne({ offerId: postData.fieldId })
-            console.log(offer);
+            offer = await Offer.findOne({ offerId: _postData.fieldId })
             _postData.offerId = offer._id;
             _postData.offerType = offer.offerType;
         } catch (error) {
