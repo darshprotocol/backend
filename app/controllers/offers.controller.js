@@ -54,10 +54,8 @@ exports.insertLoanId = (offerId, loanId) => {
             returnNewDocument: true,
             returnDocument: "after"
         } // options
-    ).then(data => {
-        console.log(data);
-    }).catch(err => {
-        console.log(err);
+    ).then(data => { }).catch(err => {
+        console.error(err);
     })
 }
 
@@ -71,10 +69,8 @@ exports.insertRequestId = (offerId, requestId) => {
             returnNewDocument: true,
             returnDocument: "after"
         } // options
-    ).then(data => {
-        console.log(data);
-    }).catch(err => {
-        console.log(err);
+    ).then(data => { }).catch(err => {
+        console.error(err);
     })
 }
 
@@ -88,10 +84,8 @@ exports.insertTransferId = (offerId, transferId) => {
             returnNewDocument: true,
             returnDocument: "after"
         } // options
-    ).then(data => {
-        console.log(data);
-    }).catch(err => {
-        console.log(err);
+    ).then(data => {}).catch(err => {
+        console.error(err);
     })
 }
 
