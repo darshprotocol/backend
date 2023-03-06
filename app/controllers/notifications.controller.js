@@ -18,17 +18,18 @@ exports.create = async (req, res) => {
 
         try {
             offer = await Offer.findOne({ offerId: postData.fieldId })
-            console.log(offer);
+            console.log('offer', offer);
         } catch (error) {
             console.error(error);
         }
 
-        // Save or update Notification in the database
-        const notification = new Notification(_postData)
-
+        
         if (offer) {
             _postData.offerId = offer._id;
         }
+ 
+        // Save or update Notification in the database
+        const notification = new Notification(_postData)
 
         notification.save().then(data => {
             res.send(data)
