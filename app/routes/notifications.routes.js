@@ -8,5 +8,9 @@ module.exports = app => {
     // Retrieve all notifications
     router.get("/", notification.findAll)
 
+    router.post("/mark/:id", notification.markAsRead)
+
+    router.post("/markall", notification.markAllAsRead)
+
     app.use("/notifications", router);
 };

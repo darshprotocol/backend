@@ -12,6 +12,9 @@ module.exports = mongoose => {
         to: {
             type: String
         },
+        fieldId: {
+            type: Number
+        },
         readAt: {
             type: Number
         }

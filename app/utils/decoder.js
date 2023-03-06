@@ -21,7 +21,7 @@ module.exports = {
             case 'activities':
                 return ['address', 'uint16', 'uint16', 'uint256', 'uint256', 'uint256', 'uint256', 'uint256', 'uint16', 'uint256', 'uint256', 'uint16']
             case 'notifications': 
-                return ['uint', 'uint256', 'address', 'address']
+                return ['uint', 'uint256', 'address', 'address', 'uint256']
             default: return null
         }
     },
@@ -124,6 +124,7 @@ module.exports = {
                     timestamp: data[1],
                     from: data[2].toLowerCase(),
                     to: data[3].toLowerCase(),
+                    fieldId: data[4],
                     readAt: 0
                 }
             default: return null
