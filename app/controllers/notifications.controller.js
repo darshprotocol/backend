@@ -17,7 +17,7 @@ exports.create = async (req, res) => {
         console.log('notification', postData);
 
         try {
-            offer = await Offer.find({ offerId: postData.fieldId })
+            offer = await Offer.findOne({ offerId: postData.fieldId })
             console.log(offer);
         } catch (error) {
             console.error(error);
