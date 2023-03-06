@@ -14,11 +14,8 @@ exports.create = async (req, res) => {
         const _postData = postData[index]
         let offer = null;
 
-        console.log('notification', postData);
-
         try {
             offer = await Offer.findOne({ offerId: postData.fieldId })
-            console.log('offer', offer);
         } catch (error) {
             console.error(error);
         }
